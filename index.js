@@ -11,15 +11,21 @@ var ping = function(stream, opts, fn) { // TODO: move to module
 	var id;
 	var interval = opts.interval || 15000;
 	var timeout = opts.timeout || 5000;
+	var pinging = true;
+
+	var unping = function() {
+		pinging = false;
+		clearTimeout(id);
+	};
 
 	var destroy = function() {
-		clearTimeout(id);
+		unping();
 		stream.destroy();
 	};
 
 	var onpong = function(err) {
 		clearTimeout(id);
-		if (!err) id = setTimeout(loop, interval);
+		if (!err && pinging) id = setTimeout(loop, interval);
 	};
 
 	var loop = function() {
@@ -28,9 +34,8 @@ var ping = function(stream, opts, fn) { // TODO: move to module
 	};
 
 	id = setTimeout(loop, interval);
-	return function() {
-		clearTimeout(id);
-	};
+
+	return unping;
 };
 
 module.exports = ping;
