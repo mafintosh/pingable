@@ -8,5 +8,8 @@
   	"ping",
 	"stream",
 	"timeout"
-  ]
+  ],
+  "scripts": {
+  	"test": "node test.js"
+  }
 }
