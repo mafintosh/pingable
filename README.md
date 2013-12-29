@@ -28,6 +28,14 @@ stream.on('close', function() {
 });
 ```
 
+If you are streaming some sort of protocol thats supports a ping just do
+
+``` js
+pingable(stream, opts, function(cb) {
+	stream.ping(cb);
+});
+```
+
 ## License
 
 MIT
