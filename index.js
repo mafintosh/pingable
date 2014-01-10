@@ -1,4 +1,6 @@
-var ping = function(stream, opts, fn) { // TODO: move to module
+var eos = require('end-of-stream');
+
+var ping = function(stream, opts, fn) {
 	if (typeof opts === 'function') return ping(stream, null, opts);
 	if (!opts) opts = {};
 
@@ -25,7 +27,9 @@ var ping = function(stream, opts, fn) { // TODO: move to module
 
 	var onpong = function(err) {
 		clearTimeout(id);
-		if (!err && pinging) id = setTimeout(loop, interval);
+		if (err || !pinging) return;
+		id = setTimeout(loop, interval);
+		id.unref();
 	};
 
 	var loop = function() {
@@ -34,6 +38,9 @@ var ping = function(stream, opts, fn) { // TODO: move to module
 	};
 
 	id = setTimeout(loop, interval);
+	id.unref();
+
+	eos(stream, unping);
 
 	return unping;
 };
