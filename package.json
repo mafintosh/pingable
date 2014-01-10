@@ -5,11 +5,14 @@
   "repository": "git://github.com:mafintosh/pingable.git",
   "author": "Mathias Buus <mathiasbuus@gmail.com>",
   "keywords": [
-  	"ping",
-	"stream",
-	"timeout"
+    "ping",
+    "stream",
+    "timeout"
   ],
   "scripts": {
-  	"test": "node test.js"
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "end-of-stream": "~0.1.3"
   }
 }
