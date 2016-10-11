@@ -1,6 +1,6 @@
 {
   "name": "pingable",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Ping a stream once in while. If it times out destroy it",
   "repository": "git://github.com:mafintosh/pingable.git",
   "author": "Mathias Buus <mathiasbuus@gmail.com>",
