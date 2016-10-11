@@ -38,7 +38,7 @@ var ping = function(stream, opts, fn) {
 	};
 
 	id = setTimeout(loop, interval);
-	id.unref();
+	if (id.unref) id.unref();
 
 	eos(stream, unping);
 
