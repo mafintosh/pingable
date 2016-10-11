@@ -29,7 +29,7 @@ var ping = function(stream, opts, fn) {
 		clearTimeout(id);
 		if (err || !pinging) return;
 		id = setTimeout(loop, interval);
-		id.unref();
+		if (id.unref) id.unref();
 	};
 
 	var loop = function() {
